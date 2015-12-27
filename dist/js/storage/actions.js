@@ -1,10 +1,13 @@
-var siteRoot = "https://api.gewis.nl:443/storage/";
+var siteRoot = "http://api.gewis.nl:80/storage/";
 var selectedRow;
 function initializeTable(){
 
-    //Initialize the table with all active storagees
+    //Initialize the table with all active storages
     // Retrieves data and parses it into the table with given columns
     $('#storages').dataTable( {
+        "columnDefs": [
+            { "orderable": false, "targets": 4},
+        ],
         "info": true,
         "autoWidth": true,
         "ajax": {
@@ -86,7 +89,7 @@ function addStorageModalFunctionality() {
             $('#cname').html($('#name').val());
             $('#cownerID').html($('#ownerID').val());
 
-
+            $('#addStorageConfirm').modal({backdrop:'static'});
             $('#addStorageConfirm').modal('show');
         }
     });
@@ -107,26 +110,35 @@ function addStorageModalFunctionality() {
 function editStorageModalFunctionality() {
 
     var table = $('#storages').DataTable();
+    $('#editButton').addClass('disabled');
 
+    // When a row of the table is clicked
     $('#storages').on('click', 'tr', function () {
         if ($(this).hasClass('selected')) {
             $(this).removeClass('selected');
+            $('#editButton').addClass('disabled');
         }
         else {
+            $('#editButton').removeClass('disabled');
             table.$('tr.selected').removeClass('selected');
             $(this).addClass('selected');
-            selectedRow = table.row( this ).data();
+            selectedRow = table.row(this).data();
 
         }
     });
-    $('#editButton').click(function(){
+    $('#editButton').click(function () {
+        if ($('#editButton').hasClass('disabled')) {
+        }else {
+            openEditModal();
+        }
+    });
+    $('#storages').on('dblclick', function () {
         openEditModal();
     });
-    $('#storages').on ('dblclick' ,function () {
-        openEditModal();
-    });
+}
 
     function openEditModal(){
+        $('#identicalMessage').text("");
         // Load variables froms selected row
         var id = selectedRow['ID'];
         var name = selectedRow['name'];
@@ -137,28 +149,30 @@ function editStorageModalFunctionality() {
         $('#ename').val(name);
         $('#eownerID').val(ownerID);
         if(active == null) {
-            active=true;
-            $('#eactive').prop("checked", true);
+            active="true";
+            $('#eactive').iCheck('check')
+            $('#eactive').attr("active", true);
         }else {
-            $('#eactive').prop("checked", false);
-            active=false;
+            active = "false";
+            $('#eactive').iCheck('unCheck');
+            $('#eactive').attr("active", false);
         }
 
-
+        $('#editStorageConfirm').modal({backdrop:"static"});
         $('#editStorageConfirm').modal('show');
 
         // Edit storage button pressed.
         $('#confirmEdit').click(function () {
+            $('#identicalMessage').text("");
             //Get new values from edit modal.
             var newName = $('#ename').val();
             var newOwnerID = $('#eownerID').val();
-            var newActive = $('#eactive').prop("checked");
+            var newActive = $('#eactive').attr("active");
 
             // If no values are changed
             if(name == newName && ownerID == newOwnerID && active == newActive){
                 $('#identicalMessage').text("No changes are made to the storage");
             } else {
-                $('#identicalMessage').text("");
                 var obj = new Object();
                 obj.name = newName;
                 obj.ownerID = newOwnerID;
@@ -168,5 +182,52 @@ function editStorageModalFunctionality() {
             }
         });
     }
+
+//Handles the functionality of the checkboxes
+function checkBoxHandler(){
+    $('input:checkbox').iCheck({
+            checkboxClass: 'icheckbox_square-blue',
+            increaseArea: '50%' // optional
+        })
+        .on('ifChecked',function(e) {
+            var field = $(this).attr('id');
+
+            switch (field) {
+                case "filterCheckbox":
+                    filterDatabase(true)
+                    break;
+                case "eactive":
+                    $('#eactive').attr("active", true);
+                    break;
+            }
+        })
+        .on('ifUnchecked', function(e){
+            var field = $(this).attr('id');
+
+            switch (field) {
+                case "filterCheckbox":
+                    filterDatabase(false)
+                    break;
+                case "eactive":
+                    $('#eactive').attr("active", false);
+                    break;
+            }
+        })
 }
 
+//Filters the table based on active / inactive storages.
+function filterDatabase(checked) {
+    var table = $('#storages').DataTable();
+    $.fn.dataTable.ext.search.splice($.fn.dataTable.ext.search.indexOf(activeFilter, 1));
+    var activeFilter = function (oSettings, aData, iDataIndex) {
+
+        var row = table.row(iDataIndex).data();
+        if (!checked) {
+            return (row["deleted_at"] == null) ? true : false;
+        } else {
+            return true;
+        }
+    };
+    $.fn.dataTableExt.afnFiltering.push(activeFilter)
+    table.ajax.reload();
+}

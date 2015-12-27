@@ -126,7 +126,6 @@ desired effect
                             </li>
                         </ul>
                     </li>
-
                 </ul>
             </div>
         </nav>
@@ -160,72 +159,104 @@ desired effect
     <div class="content-wrapper">
         <!-- Content Header (Page header) -->
         <section class="content-header">
+
             <h1>
-                Storages
+                Products <-> Storages
             </h1>
 
-            <div class="row">
+            <div id=content class="row">
                 <!-- left column -->
-                <div class="col-md-3">
-                    <!-- general form elements -->
-                    <div class="box box-primary">
-                        <div class="box-header with-border">
-                            <h3 class="box-title">Create a storage</h3>
-                        </div>
-                        <!-- /.box-header -->
-                        <!-- form start -->
-                        <form id ="storage" role="form" onsubmit="return false">
+                <div class="col-md-6">
+                    <div class="box">
+                        <div class="box box-primary">
+
+                            <div class="box-header with-border">
+                                <div class="beforeCheckbox">
+                                <h3 class="box-title">Products</h3>
+                                </div>
+                                <input id="filterCheckboxProducts" type="checkbox"> Show inactive products
+
+                            </div>
+                            <!-- /.box-header -->
                             <div class="box-body">
-                                <div class="form-group">
-                                    <label for="name">Name</label>
-                                    <input type="text" class="form-control" id="name" placeholder="Enter a storage name" required>
-                                </div>
-                                <div class="form-group">
-                                    <label for="ownerID">Owner</label>
-                                    <input type="number" id="ownerID" placeholder="1" required>
-                                </div>
+                                <table id="products" class="table table-bordered table-hover">
+                                    <thead>
+                                    <tr>
+                                        <th>Name</th>
+                                        <th>Price (in cents)</th>
+                                        <th>Image</th>
+                                        <th>TraySize</th>
+                                        <th>Category</th>
+                                        <th>Owner</th>
+                                        <th>Active</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr>
+                                        <th>Name</th>
+                                        <th>Price (in cents)</th>
+                                        <th>Image</th>
+                                        <th>TraySize</th>
+                                        <th>Category</th>
+                                        <th>Owner</th>
+                                        <th>Active</th>
+                                    </tr>
+                                    </tbody>
+                                </table>
                             </div>
                             <!-- /.box-body -->
-
-                            <div class="box-footer">
-                                <input id ="addButton" type="submit" class="btn btn-primary pull-right btn-lg" value="Create storage">
-                            </div>
-                        </form>
-                    </div>
-                    <!-- /.box -->
-
-                    <!-- add Storage Confirm Modal -->
-                    <div class="modal fade " id="addStorageConfirm" tabindex="-1" role="dialog" aria-labelledby="addStorageConfirm">
-                        <div class="modal-dialog" role="document">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                                    <h4 class="modal-title" id="myModalLabel">Confirm that you want to create the following storage?</h4>
-                                </div>
-                                <div class="modal-body">
-                                    <table class="table table-hover">
-                                        <tr>
-                                            <th>Name</th>
-                                            <td id="cname"></td>
-                                        </tr>
-                                        <tr>
-                                            <th>Owner</th>
-                                            <td id="cownerID"></td>
-                                        </tr>
-                                    </table>
-                                </div>
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                                    <button type="button" id="confirmAdd" class="btn btn-primary">Create storage</button>
-                                </div>
-                            </div>
                         </div>
+                        <!-- /.box -->
                     </div>
-                    <!--/ add Storage Confirm Modal -->
+                    <!-- /box-box primary -->
+                </div>
+                <!--/.col (left) -->
+                <!-- middle column -->
+                <div class="col-md-2">
+
+                <!--/. middle column -->
+                </div>
+
+
+                <!-- right column -->
+                <div class="col-md-5">
+                    <div class="box">
+                        <div class="box box-primary">
+
+                            <div class="box-header with-border">
+                                <div class="beforeCheckbox">
+                                <h3 class="beforeCheckbox box-title">Storages</h3>
+                                </div>
+                                <input id="filterCheckboxStorage" type="checkbox"> Show inactive storages
+                            </div>
+                            <!-- /.box-header -->
+                            <div class="box-body">
+                                <table id="storages" class="table table-bordered table-hover">
+                                    <thead>
+                                    <tr>
+                                        <th>Name</th>
+                                        <th>Owner</th>
+                                        <th>Active</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr>
+                                        <th>Name</th>
+                                        <th>Owner</th>
+                                        <th>Active</th>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <!-- /.box-body -->
+                        </div>
+                        <!-- /.box -->
+                </div>
+
 
                     <!-- Warning modal -->
                     <div class="modal modal-warning" id="modalWarning">
-                        <div class="modal-dialog">
+                        <div class="modal-dialog waitingAnimationApproved">
                             <div class="modal-content">
                                 <div class="modal-header">
                                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -289,102 +320,30 @@ desired effect
                         <!-- /.modal-dialog -->
                     </div>
                     <!-- / Error modal -->
-                </div>
-                <!--/.col (left) -->
-                <!-- right column -->
-                <div class="col-md-9">
-                    <div class="box">
-                        <div class="box box-primary">
 
-                            <div class="box-header with-border">
-                                <h3 class="box-title">Storages</h3>
-                                <input id ="editButton" type="submit" class="btn btn-primary beforeCheckbox" value="Edit storage" style="border-color: transparent; margin-left: 20px;">
-                                <input id="filterCheckbox" type="checkbox"> Show inactive storages
-                            </div>
-                            <!-- /.box-header -->
-                            <div class="box-body">
-                                <table id="storages" class="table table-bordered table-hover">
-                                    <thead>
-                                    <tr>
-                                        <th>Name</th>
-                                        <th>Owner</th>
-                                        <th>Creation Date</th>
-                                        <th>Last updated</th>
-                                        <th>Active</th>
-                                    </tr>
-                                    </thead>
-                                    <tbody>
-                                    <tr>
-                                        <th>Name</th>
-                                        <th>Owner</th>
-                                        <th>Creation Date</th>
-                                        <th>Last updated</th>
-                                        <th>Active</th>
-                                    </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                            <!-- /.box-body -->
-                        </div>
-                        <!-- /.box -->
-                     </div>
-                </div>
-                    <!-- edit storage Confirm Modal -->
-                    <div class="modal fade " id="editStorageConfirm" tabindex="-1" role="dialog" aria-labelledby="editStorageConfirm">
-                        <div class="modal-dialog" role="document">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                                    <h4 class="modal-title" id="editModalLabel">Confirm that you want edit the storage</h4>
-                                </div>
-                                <div class="modal-body">
-                                    <table class="table table-hover">
-                                        <tr>
-                                            <th>Name</th>
-                                            <td><input type="text" class="form-control" id="ename" placeholder="Enter storage name"  required></td>
-                                        </tr>
-                                        <tr>
-                                            <th>Owner</th>
-                                            <td><input type="number" id="eownerID" placeholder="1" required></td>
-                                        </tr>
-                                        <tr>
-                                            <th>Active</th>
-                                            <td><input type="checkbox" id="eactive" ></td>
-                                        </tr>
-                                    </table>
-                                    <div style="margin-top: -25px;"  class="pull-right text-blue" >
-                                        <h4 id="identicalMessage" class=pull-right=></h4>
-                                    </div>
-                                </div>
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                                    <button type="button" id="confirmEdit" class="btn btn-primary">Edit storage</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <!--/ edit storage Confirm Modal -->
                 <!-- /.content -->
             </div>
-            <!-- /.content-wrapper -->
-        </section>
     </div>
-    <!-- Main Footer -->
-    <footer class="main-footer">
-        <!-- To the right -->
-        <div class="pull-right hidden-xs">
-            Anything you want
-        </div>
-        <!-- Default to the left -->
-        <strong>Copyright &copy; 2015 <a href="#">Company</a>.</strong> All rights reserved.
-    </footer>
+    <!-- /.content-wrapper -->
+    </section>
+
+</div>
+<!-- Main Footer -->
+<footer class="main-footer">
+    <!-- To the right -->
+    <div class="pull-right hidden-xs">
+        Anything you want
+    </div>
+    <!-- Default to the left -->
+    <strong>Copyright &copy; 2015 <a href="#">Company</a>.</strong> All rights reserved.
+</footer>
 </div>
 </div>
 <!-- REQUIRED JS SCRIPTS -->
 <!-- Sidebar JS-->
 <script src="../dist/js/general.js"></script>
 <!-- Actions JS -->
-<script src="../dist/js/storage/actions.js"></script>
+<script src="../dist/js/productsStorage/actions.js"></script>
 <!-- jQuery 2.1.4 -->
 <script src="../plugins/jQuery/jQuery-2.1.4.min.js"></script>
 <!-- Bootstrap 3.3.5 -->
@@ -393,21 +352,19 @@ desired effect
 <script src="../dist/js/app.min.js"></script>
 <!-- DataTables -->
 <script src="../plugins/datatables/jquery.dataTables.min.js"></script>
-<script src="../plugins/datatables/dataTables.bootstrap.min.js"></script>
+<script src="../plugins/datatables/dataTables.bootstrap.js"></script>
 <!-- SlimScroll -->
 <script src="../plugins/slimScroll/jquery.slimscroll.min.js"></script>
 <!-- FastClick -->
-<script src="../plugins/fastclick/fastclick.min.js"></script>
+<script src="../plugins/fastclick/fastclick.js"></script>
 <!--ICheck -->
 <script src="../plugins/iCheck/icheck.min.js"></script>
 <script>
     $( document ).ready(function() {
         createSidebarMenu();
-        initializeTable();
-        addStorageModalFunctionality();
-        editStorageModalFunctionality();
+        initializeTables();
         checkBoxHandler();
-        filterDatabase(false);
+        filterDatabases(false,false);
     });
 
 </script>
