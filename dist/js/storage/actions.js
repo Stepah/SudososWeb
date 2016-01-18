@@ -1,14 +1,17 @@
 var siteRoot = "http://api.gewis.nl:80/storage/";
 var selectedRow;
 function initializeTable(){
-
+    loadingAnimation($('#storages'),true);
     //Initialize the table with all active storages
     // Retrieves data and parses it into the table with given columns
     $('#storages').dataTable( {
         "columnDefs": [
             { "orderable": false, "targets": 4},
         ],
+        "fnInitComplete": function(){filterDatabase(false);
+                         loadingAnimation($('#storages'),false)},
         "info": true,
+        "iDisplayLength": "100",
         "autoWidth": true,
         "ajax": {
             "url": siteRoot,

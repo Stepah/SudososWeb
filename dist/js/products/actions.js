@@ -1,9 +1,8 @@
 var siteRoot = "http://api.gewis.nl:80/product/";
 var selectedRow;
-//var table = $('#products').DataTable();
 
 function initializeTable(){
-
+    loadingAnimation($('#products'),true);
     //Initialize the table with all active events
     // Retrieves data and parses it into the table with given columns
         $('#products').dataTable( {
@@ -11,6 +10,8 @@ function initializeTable(){
                 { "orderable": false, "targets": 2},
                 { "orderable": false, "targets": 8 }
                 ],
+            "fnInitComplete": function(){filterDatabase(false);
+                loadingAnimation($('#products'),false)},
             "info": true,
             "iDisplayLength": "100",
             "autoWidth": true,

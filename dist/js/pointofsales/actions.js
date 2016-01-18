@@ -1,15 +1,18 @@
 var siteRoot = "http://api.gewis.nl/pointOfSales/";
 var selectedRow;
 function initializeTable(){
-
+    loadingAnimation($('#pointsOfSales'),true);
     //Initialize the table with all active events
     // Retrieves data and parses it into the table with given columns
     $('#pointsOfSales').dataTable( {
         "columnDefs": [
             { "orderable": false, "targets": 4},
             ],
+        "fnInitComplete": function(){filterDatabase(false);
+            loadingAnimation($('#pointsOfSales'),false)},
         "info": true,
         "autoWidth": true,
+        "iDisplayLength": "100",
         "ajax": {
             "url": siteRoot,
             "dataSrc": ""

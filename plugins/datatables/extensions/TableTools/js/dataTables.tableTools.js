@@ -457,7 +457,7 @@ window.ZeroClipboard_TableTools = ZeroClipboard_TableTools;
  * @param {Function} oOpts.fnRowDeselected Callback function when row is deselected
  * @param {Array} oOpts.aButtons List of buttons to be used
  */
-TableTools = function( oDT, oOpts )
+var TableTools = function( oDT, oOpts )
 {
 	/* Santiy check that we are a new instance */
 	if ( ! this instanceof TableTools )

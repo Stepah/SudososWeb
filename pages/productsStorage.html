@@ -18,8 +18,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
     <!-- DataTables -->
     <link rel="stylesheet" href="../plugins/datatables/dataTables.bootstrap.css">
-    <!--<link rel="stylesheet" href="plugins/datatables/jquery.dataTables.css">
-    <!-- Theme style -->
+    <link rel="stylesheet" href="../plugins/datatables/jquery.dataTables.css">
+   <!-- Theme style -->
     <link rel="stylesheet" href="../dist/css/AdminLTE.min.css">
     <!-- AdminLTE Skins. We have chosen the skin-blue for this starter
           page. However, you can choose any other skin. Make sure you
@@ -164,10 +164,10 @@ desired effect
                 Products <-> Storages
             </h1>
 
-            <div id=content class="row">
+            <div id="content" class="row waitingAnimationApproved">
                 <!-- left column -->
                 <div class="col-md-6">
-                    <div class="box">
+                    <div class="box waitingAnimationApproved">
                         <div class="box box-primary">
 
                             <div class="box-header with-border">
@@ -183,7 +183,7 @@ desired effect
                                     <thead>
                                     <tr>
                                         <th>Name</th>
-                                        <th>Price (in cents)</th>
+                                        <th>Price (cents)</th>
                                         <th>Image</th>
                                         <th>TraySize</th>
                                         <th>Category</th>
@@ -194,7 +194,7 @@ desired effect
                                     <tbody>
                                     <tr>
                                         <th>Name</th>
-                                        <th>Price (in cents)</th>
+                                        <th>Price (cents)</th>
                                         <th>Image</th>
                                         <th>TraySize</th>
                                         <th>Category</th>
@@ -212,15 +212,16 @@ desired effect
                 </div>
                 <!--/.col (left) -->
                 <!-- middle column -->
-                <div class="col-md-2">
-
+                <div class="col-md-1">
+                   <button id="addProduct" type="button" class="disabled btn btn-primary btn-large fa fa-4x fa-chevron-right" style="margin-left:20px;"></button>
+                   <button id="removeProduct" type="button" class="disabled btn btn-primary btn-large fa fa-4x fa-chevron-left" style="margin-top:30px;margin-left:20px; margin-bottom:30px"></button>
                 <!--/. middle column -->
                 </div>
 
 
                 <!-- right column -->
                 <div class="col-md-5">
-                    <div class="box">
+                    <div class="box waitingAnimationApproved">
                         <div class="box box-primary">
 
                             <div class="box-header with-border">
@@ -240,7 +241,7 @@ desired effect
                                     </tr>
                                     </thead>
                                     <tbody>
-                                    <tr>
+                                    <tr class="test">
                                         <th>Name</th>
                                         <th>Owner</th>
                                         <th>Active</th>
@@ -252,75 +253,6 @@ desired effect
                         </div>
                         <!-- /.box -->
                 </div>
-
-
-                    <!-- Warning modal -->
-                    <div class="modal modal-warning" id="modalWarning">
-                        <div class="modal-dialog waitingAnimationApproved">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                        <span aria-hidden="true">&times;</span></button>
-                                    <h4 class="modal-title">Warning</h4>
-                                </div>
-                                <div class="modal-body">
-                                    <p id="warningText">Warning</p>
-                                </div>
-                                <div class="modal-footer">
-                                    <button type="button" data-dismiss="modal" class="btn btn-outline">Close</button>
-                                </div>
-                            </div>
-                            <!-- /.modal-content -->
-                        </div>
-                        <!-- /.modal-dialog -->
-                    </div>
-                    <!--/  Warning modal -->
-                    <!--  Success modal -->
-                    <div class="modal modal-success"  id="modalSuccess">
-                        <div class="modal-dialog">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                        <span aria-hidden="true">&times;</span></button>
-                                    <h4 class="modal-title">Success</h4>
-                                </div>
-                                <div class="modal-body">
-                                    <p id="successText">Success</p>
-                                </div>
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-outline" data-dismiss="modal" onclick="location.reload()">Close</button>
-
-                                </div>
-                            </div>
-                            <!-- /.modal-content -->
-                        </div>
-                        <!-- /.modal-dialog -->
-                    </div>
-                    <!--  Success modal -->
-
-                    <!--  Error modal -->
-                    <div class="modal modal-danger" id="modalError">
-                        <div class="modal-dialog">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                        <span aria-hidden="true">&times;</span></button>
-                                    <h4 class="modal-title">Error</h4>
-                                </div>
-                                <div class="modal-body">
-                                    <p id="errorText">Error</p>
-                                </div>
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-outline pull-left" data-dismiss="modal">Close</button>
-                                    <button type="button" class="btn btn-outline">Save changes</button>
-                                </div>
-                            </div>
-                            <!-- /.modal-content -->
-                        </div>
-                        <!-- /.modal-dialog -->
-                    </div>
-                    <!-- / Error modal -->
-
                 <!-- /.content -->
             </div>
     </div>
@@ -364,7 +296,9 @@ desired effect
         createSidebarMenu();
         initializeTables();
         checkBoxHandler();
-        filterDatabases(false,false);
+        templateModals();
+        storageTableFunctionality();
+        productsTableFunctionality();
     });
 
 </script>

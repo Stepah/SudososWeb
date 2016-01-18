@@ -164,7 +164,7 @@ desired effect
                 Storages
             </h1>
 
-            <div class="row">
+            <div id="content" class="row">
                 <!-- left column -->
                 <div class="col-md-3">
                     <!-- general form elements -->
@@ -194,106 +194,12 @@ desired effect
                     </div>
                     <!-- /.box -->
 
-                    <!-- add Storage Confirm Modal -->
-                    <div class="modal fade " id="addStorageConfirm" tabindex="-1" role="dialog" aria-labelledby="addStorageConfirm">
-                        <div class="modal-dialog" role="document">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                                    <h4 class="modal-title" id="myModalLabel">Confirm that you want to create the following storage?</h4>
-                                </div>
-                                <div class="modal-body">
-                                    <table class="table table-hover">
-                                        <tr>
-                                            <th>Name</th>
-                                            <td id="cname"></td>
-                                        </tr>
-                                        <tr>
-                                            <th>Owner</th>
-                                            <td id="cownerID"></td>
-                                        </tr>
-                                    </table>
-                                </div>
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                                    <button type="button" id="confirmAdd" class="btn btn-primary">Create storage</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <!--/ add Storage Confirm Modal -->
 
-                    <!-- Warning modal -->
-                    <div class="modal modal-warning" id="modalWarning">
-                        <div class="modal-dialog">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                        <span aria-hidden="true">&times;</span></button>
-                                    <h4 class="modal-title">Warning</h4>
-                                </div>
-                                <div class="modal-body">
-                                    <p id="warningText">Warning</p>
-                                </div>
-                                <div class="modal-footer">
-                                    <button type="button" data-dismiss="modal" class="btn btn-outline">Close</button>
-                                </div>
-                            </div>
-                            <!-- /.modal-content -->
-                        </div>
-                        <!-- /.modal-dialog -->
-                    </div>
-                    <!--/  Warning modal -->
-                    <!--  Success modal -->
-                    <div class="modal modal-success"  id="modalSuccess">
-                        <div class="modal-dialog">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                        <span aria-hidden="true">&times;</span></button>
-                                    <h4 class="modal-title">Success</h4>
-                                </div>
-                                <div class="modal-body">
-                                    <p id="successText">Success</p>
-                                </div>
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-outline" data-dismiss="modal" onclick="location.reload()">Close</button>
-
-                                </div>
-                            </div>
-                            <!-- /.modal-content -->
-                        </div>
-                        <!-- /.modal-dialog -->
-                    </div>
-                    <!--  Success modal -->
-
-                    <!--  Error modal -->
-                    <div class="modal modal-danger" id="modalError">
-                        <div class="modal-dialog">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                        <span aria-hidden="true">&times;</span></button>
-                                    <h4 class="modal-title">Error</h4>
-                                </div>
-                                <div class="modal-body">
-                                    <p id="errorText">Error</p>
-                                </div>
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-outline pull-left" data-dismiss="modal">Close</button>
-                                    <button type="button" class="btn btn-outline">Save changes</button>
-                                </div>
-                            </div>
-                            <!-- /.modal-content -->
-                        </div>
-                        <!-- /.modal-dialog -->
-                    </div>
-                    <!-- / Error modal -->
                 </div>
                 <!--/.col (left) -->
                 <!-- right column -->
                 <div class="col-md-9">
-                    <div class="box">
+                    <div class="box waitingAnimationApproved">
                         <div class="box box-primary">
 
                             <div class="box-header with-border">
@@ -329,42 +235,70 @@ desired effect
                         <!-- /.box -->
                      </div>
                 </div>
-                    <!-- edit storage Confirm Modal -->
-                    <div class="modal fade " id="editStorageConfirm" tabindex="-1" role="dialog" aria-labelledby="editStorageConfirm">
-                        <div class="modal-dialog" role="document">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                                    <h4 class="modal-title" id="editModalLabel">Confirm that you want edit the storage</h4>
-                                </div>
-                                <div class="modal-body">
-                                    <table class="table table-hover">
-                                        <tr>
-                                            <th>Name</th>
-                                            <td><input type="text" class="form-control" id="ename" placeholder="Enter storage name"  required></td>
-                                        </tr>
-                                        <tr>
-                                            <th>Owner</th>
-                                            <td><input type="number" id="eownerID" placeholder="1" required></td>
-                                        </tr>
-                                        <tr>
-                                            <th>Active</th>
-                                            <td><input type="checkbox" id="eactive" ></td>
-                                        </tr>
-                                    </table>
-                                    <div style="margin-top: -25px;"  class="pull-right text-blue" >
-                                        <h4 id="identicalMessage" class=pull-right=></h4>
-                                    </div>
-                                </div>
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                                    <button type="button" id="confirmEdit" class="btn btn-primary">Edit storage</button>
-                                </div>
+                <!-- /.content -->
+
+
+                <!-- add Storage Confirm Modal -->
+                <div class="modal fade " id="addStorageConfirm" tabindex="-1" role="dialog" aria-labelledby="addStorageConfirm">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                <h4 class="modal-title" id="myModalLabel">Confirm that you want to create the following storage?</h4>
+                            </div>
+                            <div class="modal-body">
+                                <table class="table table-hover">
+                                    <tr>
+                                        <th>Name</th>
+                                        <td id="cname"></td>
+                                    </tr>
+                                    <tr>
+                                        <th>Owner</th>
+                                        <td id="cownerID"></td>
+                                    </tr>
+                                </table>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                <button type="button" id="confirmAdd" class="btn btn-primary">Create storage</button>
                             </div>
                         </div>
                     </div>
-                    <!--/ edit storage Confirm Modal -->
-                <!-- /.content -->
+                </div>
+                <!--/ add Storage Confirm Modal -->
+                <div tabindex="-1" class="modal fade " id="editStorageConfirm" role="dialog" aria-labelledby="editStorageConfirm">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button class="close" aria-label="Close" type="button" data-dismiss="modal"><span aria-hidden="true">×</span></button>
+                                <h4 class="modal-title" id="editModalLabel">Confirm that you want edit the storage</h4>
+                            </div>
+                            <div class="modal-body">
+                                <table class="table table-hover">
+                                    <tbody><tr>
+                                        <th>Name</th>
+                                        <td><input class="form-control" id="ename" required="" type="text" placeholder="Enter storage name"></td>
+                                    </tr>
+                                    <tr>
+                                        <th>Owner</th>
+                                        <td><input id="eownerID" required="" type="number" placeholder="1"></td>
+                                    </tr>
+                                    <tr>
+                                        <th>Active</th>
+                                        <td><input id="eactive" type="checkbox"></td>
+                                    </tr>
+                                    </tbody></table>
+                                <div class="pull-right text-blue" style="margin-top: -25px;">
+                                    <h4 class="pull-right=" id="identicalMessage"></h4>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button class="btn btn-default" type="button" data-dismiss="modal">Close</button>
+                                <button class="btn btn-primary" id="confirmEdit" type="button">Edit storage</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
             <!-- /.content-wrapper -->
         </section>
@@ -408,6 +342,7 @@ desired effect
         editStorageModalFunctionality();
         checkBoxHandler();
         filterDatabase(false);
+        templateModals();
     });
 
 </script>
