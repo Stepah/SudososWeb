@@ -3,9 +3,9 @@ var siteRootStorage = "http://api.gewis.nl:80/storage/";
 var productsChecked = false;
 var storageChecked = false;
 var productsInStorageArray = {};
-var productSelected = false;
-var productStorageSelected = false;
-var storageSelected = false;
+var productSelected = null;
+var productStorageSelected = null;
+var storageSelected = null;
 
 /**
  * Initialized the products table.
@@ -126,6 +126,7 @@ function getProductsPerStorage(storageID){
                    getAdditionalProductInformation(storageID,data[key]);
                 }
                 return null;
+                console.log(productsInStorageArray);
             },
             error: function(error){
                 loadingAnimation('products',false);
@@ -139,17 +140,21 @@ function getProductsPerStorage(storageID){
 }
 
 //TODO
-function addProductToStorage(){
+function addProductToStorage(storageID,productID,data){
     // start the load animation
     loadingAnimation('content',true);
     $.ajax({
-        url: siteRootStorage + storageID +"/stores",
-        type: "GET",
+        url: siteRootStorage + storageID +"/stores/" + productID,
+        type: "POST",
         async: false,
         crossDomain: true,
-        dataType: "json",
+        processData: false,
+        contentType: false,
+        data: data,
         success: function (data) {
             loadingAnimation('content',false);
+            getProductsPerStorage(storageID);
+            $('#storages'+storageID).DataTable().ajax.reload();
         },
         error: function(error){
             loadingAnimation('content',false);
@@ -292,14 +297,15 @@ function productsTableFunctionality(){
     $('#products').on('click', 'tr', function () {
         if ($(this).hasClass('selected')) {
             $(this).removeClass('selected');
-            setProductSelected(false);
+            setProductSelected(null);
         }
         else {
 
             table.$('tr.selected').removeClass('selected');
             $(this).addClass('selected');
-            setProductSelected(true);
             selectedRow = table.row(this).data();
+            setProductSelected(selectedRow);
+
         }
     });
 }
@@ -328,7 +334,7 @@ function onClickStorageRow(){
             //Remove the shown and selected class.
             tr.removeClass('shown');
             tr.removeClass('selected');
-            setStorageSelected(false);
+            setStorageSelected(null);
             // Close the row
             table.fnClose(tr);
         }else{
@@ -341,9 +347,10 @@ function onClickStorageRow(){
             table2.$('tr.selected').removeClass('selected');
             tr.addClass('shown');
             tr.addClass('selected');
-            setStorageSelected(true);
             //Get storage ID
             var id = row.data()["ID"];
+            setStorageSelected(id);
+
 
             /* Open this row */
             table.fnOpen(tr, fnFormatDetails(id), 'details');
@@ -364,14 +371,15 @@ function onClickProductStorageRow(){
 
         if ($(this).hasClass('selected')) {
             $(this).removeClass('selected');
-            setProductStorageSelected(false);
+            setProductStorageSelected(null);
 
         }
         else {
             table.$('tr.selected').removeClass('selected');
             $(this).addClass('selected');
-            setProductStorageSelected(true);
             var selectedProduct = table.row( this ).data();
+            setProductStorageSelected(selectedProduct);
+
         }
     });
 }
@@ -451,7 +459,6 @@ function getChildData(){
 }
 
 function setButtonAvailability(){
-
     if(productSelected && storageSelected){
         $('#addProduct').removeClass("disabled");
     }else{
@@ -478,4 +485,16 @@ function setStorageSelected(value){
 function setProductStorageSelected(value){
     productStorageSelected = value;
     setButtonAvailability();
+}
+
+function buttonHandler(){
+    $('#addProduct').on("click", function(){
+        var stock = new FormData();
+        stock.append('stock', 0);
+        addProductToStorage(storageSelected,productSelected["ID"],stock);
+    });
+
+    $('#removeProduct').on("click", function(){
+
+    })
 }
